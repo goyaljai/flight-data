@@ -23,6 +23,9 @@ The `massive_flight_dataset.csv` file contains highly detailed, multivariate fea
 | **`Scrape_Timestamp`** | `Datetime` | The exact time the scraper queried the API. This is crucial for tracking "when" the price was recorded. |
 | **`Days_to_Departure`** | `Integer` | The number of days between the scrape date and the flight date. Guaranteed to be exactly `7`, `14`, `30`, or `60`. |
 | **`Departure_Date`** | `Date` | The actual calendar date the flight takes off (Format: YYYY-MM-DD). |
+| **`Day_of_Week`** | `String` | The day of the week for the departure date (e.g., `Monday`, `Friday`). Highly useful for weekend surge pricing analysis. |
+| **`Departure_Time`** | `String` | The time of day the flight takes off (e.g., `10:00`). |
+| **`Arrival_Time`** | `String` | The time of day the flight lands at its destination (e.g., `12:20`). |
 | **`Source_City`** | `String` | The 3-letter IATA Airport Code of the departure city (e.g., `BLR` for Bengaluru). |
 | **`Destination_City`** | `String` | The 3-letter IATA Airport Code of the arrival city (e.g., `JAI` for Jaipur). |
 | **`Airline`** | `String` | The carrier operating the flight (e.g., `IndiGo`, `Air India`, `Akasa Air`). |
@@ -30,6 +33,7 @@ The `massive_flight_dataset.csv` file contains highly detailed, multivariate fea
 | **`Total_Duration_Mins`** | `Integer` | The total duration of the trip from takeoff to final landing, measured in minutes. |
 | **`Number_of_Stops`** | `Integer` | `0` indicates a direct flight. `1` or more indicates layovers. |
 | **`CO2_Emissions_Grams`** | `Integer` | The estimated carbon footprint of the flight. Excellent for complex multi-variable Deep Learning models. |
+| **`Price_Level`** | `String` | Google's internal classification of the fare (`high`, `typical`, or `low`). Extremely powerful categorical feature for ML. |
 | **`Price_INR`** | `Integer` | The absolute cheapest fare available on Google Flights at the exact moment of scraping, in Indian Rupees (₹). |
 
 ---
