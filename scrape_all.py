@@ -37,7 +37,10 @@ def fetch_flight_data(src, dest, days_out):
         data = res.json()
         best = data.get("best_flights", [])
         if not best:
-            return None
+            # Fallback to other flights if Google didn't classify any as "Best"
+            best = data.get("other_flights", [])
+            if not best:
+                return None
             
         f = best[0]
         flight_leg = f.get("flights", [{}])[0]
