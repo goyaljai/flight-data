@@ -35,4 +35,5 @@ jobs:
           git add massive_flight_dataset.csv
           # Only commit if there are changes
           git diff --quiet && git diff --staged --quiet || git commit -m "Auto-Scrape: Daily 15-City Dataset Update"
+          git pull --rebase origin main
           git push
