@@ -35,14 +35,14 @@ def fetch_flight_data(src, dest, days_out):
     try:
         res = requests.get("https://serpapi.com/search.json", params=params)
         data = res.json()
-        best = data.get("best_flights", [])
-        if not best:
-            # Fallback to other flights if Google didn't classify any as "Best"
-            best = data.get("other_flights", [])
-            if not best:
-                return None
+        all_flights = data.get("best_flights", []) + data.get("other_flights", [])
+        if not all_flights:
+            return None
             
-        f = best[0]
+        # Find the absolute cheapest flight among all returned flights
+        best = min(all_flights, key=lambda x: x.get("price", float('inf')))
+        
+        f = best
         flight_leg = f.get("flights", [{}])[0]
         
         # Extract Times
