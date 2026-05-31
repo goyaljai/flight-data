@@ -25,10 +25,11 @@ def fetch_flight_data(src, dest, days_out):
         "departure_id": src,
         "arrival_id": dest,
         "outbound_date": target_date,
-        "type": "2",
         "currency": "INR",
         "hl": "en",
         "gl": "in",
+        "type": 2, # One-way flight
+        "sort": 2, # Sort by Price
         "api_key": SERPAPI_KEY
     }
     
