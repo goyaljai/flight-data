@@ -30,8 +30,8 @@ jobs:
 
       - name: Commit and Push changes
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git config --global user.name 'goyaljai'
+          git config --global user.email 'goyaljai.y14@gmail.com'
           git add massive_flight_dataset.csv
           # Only commit if there are changes
           git diff --quiet && git diff --staged --quiet || git commit -m "Auto-Scrape: Daily 15-City Dataset Update"
