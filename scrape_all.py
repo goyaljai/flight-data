@@ -62,16 +62,38 @@ def main():
         return
 
     # Generate all 210 permutations (src != dest)
-    routes = list(itertools.permutations(CITIES.values(), 2))
-    targets = [1, 15, 30]
+    all_routes = list(itertools.permutations(CITIES.values(), 2))
+    all_routes.sort() # Ensure consistent ordering
+    
+    # --- 3-DAY ROTATION LOGIC ---
+    # We divide the 210 routes into 3 batches of 70 routes each.
+    # Depending on today's day of the year, we run exactly one batch.
+    day_of_year = datetime.now().timetuple().tm_yday
+    batch_index = day_of_year % 3
+    
+    # Slice the list into 3 chunks
+    chunk_size = len(all_routes) // 3
+    batches = [
+        all_routes[0:chunk_size], 
+        all_routes[chunk_size:chunk_size*2], 
+        all_routes[chunk_size*2:]
+    ]
+    
+    todays_routes = batches[batch_index]
+    
+    # --- PRO TARGET HORIZONS ---
+    targets = [7, 14, 30, 60]
     
     new_rows = []
     
-    # 210 routes * 3 target dates = 630 iterations
+    total_calls = len(todays_routes) * len(targets)
+    print(f"Starting Rotation Batch {batch_index + 1}/3")
+    print(f"Processing {len(todays_routes)} routes x {len(targets)} dates = {total_calls} API calls today.")
+    
     count = 1
-    for src, dest in routes:
+    for src, dest in todays_routes:
         for days_out in targets:
-            print(f"[{count}/630] Fetching {src} -> {dest} for {days_out} days out...")
+            print(f"[{count}/{total_calls}] Fetching {src} -> {dest} for {days_out} days out...")
             data = fetch_flight_data(src, dest, days_out)
             if data:
                 new_rows.append(data)
