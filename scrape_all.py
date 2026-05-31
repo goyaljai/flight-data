@@ -28,6 +28,7 @@ def fetch_flight_data(src, dest, days_out):
         "type": "2",
         "currency": "INR",
         "hl": "en",
+        "gl": "in",
         "api_key": SERPAPI_KEY
     }
     
