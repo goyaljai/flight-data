@@ -1,4 +1,0 @@
-Scrape_Timestamp,Days_to_Departure,Departure_Date,Airline,Flight_Number,Departure_Time,Arrival_Time,Total_Duration_Mins,Number_of_Stops,CO2_Emissions_Grams,Price_INR
-2026-05-31 10:03:15,1,2026-06-01,IndiGo,6E 838,2026-06-01 22:40,2026-06-02 00:50,130,0,105000,7270
-2026-05-31 10:03:15,15,2026-06-15,IndiGo,6E 312,2026-06-15 09:15,2026-06-15 13:45,270,1,127000,7777
-2026-05-31 10:03:15,30,2026-06-30,IndiGo,6E 5089,2026-06-30 05:30,2026-06-30 10:30,300,1,137000,7023
