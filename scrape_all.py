@@ -40,17 +40,36 @@ def fetch_flight_data(src, dest, days_out):
             return None
             
         f = best[0]
+        flight_leg = f.get("flights", [{}])[0]
+        
+        # Extract Times
+        dep_time_raw = flight_leg.get("departure_airport", {}).get("time", "")
+        arr_time_raw = flight_leg.get("arrival_airport", {}).get("time", "")
+        dep_time = dep_time_raw.split(" ")[-1] if " " in dep_time_raw else dep_time_raw
+        arr_time = arr_time_raw.split(" ")[-1] if " " in arr_time_raw else arr_time_raw
+        
+        # Day of Week
+        dt_obj = datetime.strptime(target_date, "%Y-%m-%d")
+        day_of_week = dt_obj.strftime("%A")
+        
+        # Price Insights
+        price_level = data.get("price_insights", {}).get("price_level", "Unknown")
+
         return {
             "Scrape_Timestamp": today.strftime("%Y-%m-%d %H:%M:%S"),
             "Days_to_Departure": days_out,
             "Departure_Date": target_date,
+            "Day_of_Week": day_of_week,
+            "Departure_Time": dep_time,
+            "Arrival_Time": arr_time,
             "Source_City": src,
             "Destination_City": dest,
-            "Airline": f.get("flights", [{}])[0].get("airline", "Unknown"),
-            "Flight_Number": f.get("flights", [{}])[0].get("flight_number", "Unknown"),
+            "Airline": flight_leg.get("airline", "Unknown"),
+            "Flight_Number": flight_leg.get("flight_number", "Unknown"),
             "Total_Duration_Mins": f.get("total_duration", 0),
             "Number_of_Stops": len(f.get("flights", [])) - 1,
             "CO2_Emissions_Grams": f.get("carbon_emissions", {}).get("this_flight", 0),
+            "Price_Level": price_level,
             "Price_INR": f.get("price", 0)
         }
     except Exception as e:
