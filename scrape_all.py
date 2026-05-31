@@ -29,22 +29,26 @@ def fetch_flight_data(src, dest, days_out):
         "hl": "en",
         "gl": "in",
         "type": 2, # One-way flight
-        "sort": 2, # Sort by Price
         "api_key": SERPAPI_KEY
     }
     
     try:
         res = requests.get("https://serpapi.com/search.json", params=params)
         data = res.json()
-        all_flights = data.get("best_flights", []) + data.get("other_flights", [])
+        
+        # 1. Grab Google's "Best" Flight
+        best_flights = data.get("best_flights", [])
+        
+        # 2. Pool all flights to mathematically find the absolute cheapest
+        all_flights = best_flights + data.get("other_flights", [])
         if not all_flights:
             return None
             
-        # Find the absolute cheapest flight among all returned flights
-        best = min(all_flights, key=lambda x: x.get("price", float('inf')))
+        cheapest_flight = min(all_flights, key=lambda x: x.get("price", float('inf')))
+        best_flight = best_flights[0] if best_flights else cheapest_flight
         
-        f = best
-        flight_leg = f.get("flights", [{}])[0]
+        # Extract metadata from the CHEAPEST flight for our dataset
+        flight_leg = cheapest_flight.get("flights", [{}])[0]
         
         # Extract Times
         dep_time_raw = flight_leg.get("departure_airport", {}).get("time", "")
@@ -70,11 +74,12 @@ def fetch_flight_data(src, dest, days_out):
             "Destination_City": dest,
             "Airline": flight_leg.get("airline", "Unknown"),
             "Flight_Number": flight_leg.get("flight_number", "Unknown"),
-            "Total_Duration_Mins": f.get("total_duration", 0),
-            "Number_of_Stops": len(f.get("flights", [])) - 1,
-            "CO2_Emissions_Grams": f.get("carbon_emissions", {}).get("this_flight", 0),
+            "Total_Duration_Mins": cheapest_flight.get("total_duration", 0),
+            "Number_of_Stops": len(cheapest_flight.get("flights", [])) - 1,
+            "CO2_Emissions_Grams": cheapest_flight.get("carbon_emissions", {}).get("this_flight", 0),
             "Price_Level": price_level,
-            "Price_INR": f.get("price", 0)
+            "Cheapest_Price_INR": cheapest_flight.get("price", 0),
+            "Best_Price_INR": best_flight.get("price", 0)
         }
     except Exception as e:
         print(f"Error on {src}->{dest}: {e}")

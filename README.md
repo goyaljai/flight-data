@@ -34,7 +34,8 @@ The `massive_flight_dataset.csv` file contains highly detailed, multivariate fea
 | **`Number_of_Stops`** | `Integer` | `0` indicates a direct flight. `1` or more indicates layovers. |
 | **`CO2_Emissions_Grams`** | `Integer` | The estimated carbon footprint of the flight. Excellent for complex multi-variable Deep Learning models. |
 | **`Price_Level`** | `String` | Google's internal classification of the fare (`high`, `typical`, or `low`). Extremely powerful categorical feature for ML. |
-| **`Price_INR`** | `Integer` | The absolute cheapest fare available on Google Flights at the exact moment of scraping, in Indian Rupees (₹). |
+| **`Cheapest_Price_INR`** | `Integer` | The absolute cheapest fare available across all flights on Google Flights at the exact moment of scraping, in Indian Rupees (₹). |
+| **`Best_Price_INR`** | `Integer` | The price of the flight that Google categorizes as the "Best" option (usually a balance of duration and price). |
 
 ---
 
