@@ -11,6 +11,5 @@ venv/
 .mypy_cache/
 .ruff_cache/
 data/failures.log
-data/*/weather_snapshots.csv
 ._*
 **/._*
