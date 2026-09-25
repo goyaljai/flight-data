@@ -1,89 +1,72 @@
-# ✈️ The India Flight Prices Dataset
+# India Daily Context Dataset
 
-Welcome to the **Automated Indian Aviation Dataset**. This repository hosts a massive, continuously growing database of flight prices across the 15 largest cities in India. 
+This repository contains a standalone Python collector for daily weather, calendar, Indian public-holiday, and optional festival context for 15 Indian cities. The output is partitioned by month under `data/YYYY/MM/` so each month's files remain independently manageable.
 
-This dataset is designed specifically for **Deep Learning, Time-Series Forecasting, and Machine Learning** projects.
+## Cities
 
-## ⚙️ Architecture & Methodology
-Unlike static Kaggle datasets that suffer from "data decay", this dataset updates itself **every single day autonomously**.
+Mumbai (`BOM`), Delhi (`DEL`), Bengaluru (`BLR`), Hyderabad (`HYD`), Chennai (`MAA`), Kolkata (`CCU`), Pune (`PNQ`), Ahmedabad (`AMD`), Surat (`STV`), Visakhapatnam (`VTZ`), Jaipur (`JAI`), Kochi (`COK`), Chandigarh (`IXC`), Indore (`IDR`), and Lucknow (`LKO`).
 
-* **The Engine:** A GitHub Actions cron job pings the SerpApi (Google Flights) engine daily at exactly 12:00 UTC.
-* **The Target Matrix:** It tracks flights across 15 major cities (210 total permutations).
-* **The Rotation Strategy:** To optimize API limits while capturing rolling data, the scraper uses a **3-Day Rotation Matrix**. It divides the 210 routes into 3 batches, scraping one batch per day.
-* **The Horizon:** For every route, it captures the price exactly **7, 14, 30, and 60 days out** to map the "Surge Zone" and "Advance Booking" curves.
+## Output
 
----
+- `weather.csv`: one logical row per `City_Code` + `Date`, with model/reanalysis daily weather fields and `Weather_Source` provenance.
+- `calendar.csv`: one row per `Date`, with `Day_of_Week` and `Is_Weekend`.
+- `holidays.csv`: one row per holiday/date/region, including national and city-state rows where available.
 
-## 📊 Data Dictionary (Column Breakdown)
+The stable join keys are `City_Code` + `Date` for weather, and `Date` plus the relevant region for holidays. No future forecast placeholders are written; collection ends at today in `Asia/Kolkata` unless an explicit end date is supplied.
 
-The `massive_flight_dataset.csv` file contains highly detailed, multivariate features for every single flight. Here is exactly what each column represents:
+## Setup
 
-| Column Name | Type | Description |
-| :--- | :--- | :--- |
-| **`Scrape_Timestamp`** | `Datetime` | The exact time the scraper queried the API. This is crucial for tracking "when" the price was recorded. |
-| **`Days_to_Departure`** | `Integer` | The number of days between the scrape date and the flight date. Guaranteed to be exactly `7`, `14`, `30`, or `60`. |
-| **`Departure_Date`** | `Date` | The actual calendar date the flight takes off (Format: YYYY-MM-DD). |
-| **`Day_of_Week`** | `String` | The day of the week for the departure date (e.g., `Monday`, `Friday`). Highly useful for weekend surge pricing analysis. |
-| **`Departure_Time`** | `String` | The time of day the flight takes off (e.g., `10:00`). |
-| **`Arrival_Time`** | `String` | The time of day the flight lands at its destination (e.g., `12:20`). |
-| **`Source_City`** | `String` | The 3-letter IATA Airport Code of the departure city (e.g., `BLR` for Bengaluru). |
-| **`Destination_City`** | `String` | The 3-letter IATA Airport Code of the arrival city (e.g., `JAI` for Jaipur). |
-| **`Airline`** | `String` | The carrier operating the flight (e.g., `IndiGo`, `Air India`, `Akasa Air`). |
-| **`Flight_Number`** | `String` | The unique alphanumeric identifier for the flight (e.g., `6E 5212`). |
-| **`Total_Duration_Mins`** | `Integer` | The total duration of the trip from takeoff to final landing, measured in minutes. |
-| **`Number_of_Stops`** | `Integer` | `0` indicates a direct flight. `1` or more indicates layovers. |
-| **`CO2_Emissions_Grams`** | `Integer` | The estimated carbon footprint of the flight. Excellent for complex multi-variable Deep Learning models. |
-| **`Price_Level`** | `String` | Google's internal classification of the fare (`high`, `typical`, or `low`). Extremely powerful categorical feature for ML. |
-| **`Flight_Category`** | `String` | Denotes whether this specific row represents the `"Best"` flight recommended by Google, or the absolute `"Cheapest"` flight available. |
-| **`Price_INR`** | `Integer` | The exact price of this specific flight at the exact moment of scraping, in Indian Rupees (₹). |
-
----
-
-## 🏙️ Cities Tracked
-* Mumbai (`BOM`), Delhi (`DEL`), Bengaluru (`BLR`), Hyderabad (`HYD`), Chennai (`MAA`), Kolkata (`CCU`), Pune (`PNQ`), Ahmedabad (`AMD`), Surat (`STV`), Visakhapatnam (`VTZ`), Jaipur (`JAI`), Kochi (`COK`), Chandigarh (`IXC`), Indore (`IDR`), Lucknow (`LKO`).
-
----
-
-## Daily Context Collector (Weather, Calendar, Holidays)
-
-The `collector` package builds per-day context features for the flight dataset, written as monthly CSV partitions under `data/YYYY/MM/`. Join keys: weather joins on `City_Code` + `Date`, holidays join on `Date` + `State_Region` (the city's subdivision code, or `National` — the city-to-subdivision mapping lives in `collector/config.py`), calendar joins on `Date`.
-
-### Setup
-
-```
-pip install -r requirements.txt
+```bash
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
 ```
 
-### Commands
+API keys are read only from environment variables. Copy `.env.example` to a local, ignored file or export variables in the process environment. The collector does not auto-load `.env` files.
 
-```
-python -m collector                                   # full range: 2026-06-01 through today in India
-python -m collector --incremental                     # fetch only dates missing from existing CSVs
+## Commands
+
+```bash
+python -m collector
+python -m collector --incremental
 python -m collector --start 2026-06-01 --end 2026-09-25
-python -m collector --only weather                    # or: calendar, holidays (repeatable flag)
+python -m collector --only weather
+python -m collector --only calendar --only holidays
+python -m collector --serpapi-label morning --only weather
+python -m collector --serpapi-label midday --only weather
 ```
 
-Optional: export `CALENDARIFIC_API_KEY` (see `.env.example`) to cross-fill holiday dates from Calendarific (one request per state per year). Variables must be present in the process environment — the collector reads `os.environ` directly and does not auto-load `.env` files. `SERPAPI_API_KEY` is reserved for the flight scraper and is not used by the context collector. Transient API failures are retried with backoff; persistent API failures abort the run with a non-zero exit, while malformed rows are skipped and logged to `data/failures.log`.
+The initial backfill for this checkout is 2026-06-01 through 2026-09-25. Repeated incremental runs detect existing city/date records and avoid duplicate API work. Failed requests are retried with exponential backoff; persistent failures are not converted into null weather rows. Malformed rows are recorded in `data/failures.log`.
 
-### Output Schemas
+## Source decisions
 
-| File | Granularity | Columns |
-| :--- | :--- | :--- |
-| `data/YYYY/MM/weather.csv` | one row per city/date | `Date`, `City`, `City_Code`, `Latitude`, `Longitude`, `Temperature_Max_C`, `Temperature_Min_C`, `Temperature_Mean_C`, `Apparent_Temperature_Max_C`, `Apparent_Temperature_Min_C`, `Precipitation_Sum_MM`, `Rain_Sum_MM`, `Precipitation_Hours`, `Wind_Speed_Max_KMH`, `Wind_Gusts_Max_KMH`, `Wind_Direction_Dominant_Deg`, `Weather_Code`, `Weather_Source` |
-| `data/YYYY/MM/calendar.csv` | one row per date | `Date`, `Day_of_Week`, `Is_Weekend` |
-| `data/YYYY/MM/holidays.csv` | one row per holiday/region/date | `Date`, `Holiday_Name`, `Holiday_Type`, `State_Region` (`National` or a state/UT code), `Is_Holiday`, `Source` |
+### Weather
 
-### Data Sources & Licensing
+Open-Meteo is the primary historical source because it provides daily fields, supports the Indian locations, permits all configured locations in one request, and is suitable for historical backfill. Dates from 2022 onward use Open-Meteo's Historical Forecast API; older supported dates use the Historical Weather API/ERA5. The collector preserves the source name in each row.
 
-* **Weather: Open-Meteo.** Past dates use the Historical Forecast API (archived operational model runs, most accurate for recent years); dates before 2022 fall back to the Historical Weather API (ERA5). The collector stores dates through today only and never writes forecast placeholders. Weather data is licensed **CC BY 4.0** — attribution is required. Cite: Zippenfenig, P. (2023), *Open-Meteo.com Weather API*, https://doi.org/10.5281/ZENODO.7970649; and when ERA5 data is used: Hersbach, H. et al. (2023), *ERA5 hourly data on single levels from 1940 to present*, ECMWF, https://doi.org/10.24381/cds.adbb2d47. The free tier is **non-commercial use only** (10,000 calls/day, no uptime guarantee); commercial use of this pipeline requires an Open-Meteo subscription.
-* **Holidays: `python-holidays`** (MIT, https://github.com/vacanza/holidays), India country + subdivision calendars, both `PUBLIC` and `GOVERNMENT` categories. Optional enrichment from Calendarific (https://calendarific.com) when `CALENDARIFIC_API_KEY` is set.
-* **Calendar:** derived deterministically from the Gregorian calendar; no external source.
-* **Alternatives considered and rejected:** IMD station data (no stable public REST API suitable for unattended collection) and NOAA GSOD (observation-only; cannot cover future flight dates) were evaluated and are not used as primary sources.
+SerpAPI Google Weather is an optional supplementary source for current daily observations. It is not a historical database: its weather answer box is current/forecast-oriented, returns unit-bearing strings and weekday labels, and cannot reliably reconstruct a missed historical date. It can be used for twice-daily current snapshots and fallback/cross-check collection, but those snapshots belong in a separate audit dataset rather than silently replacing the consistent historical series. Configure it with `SERPAPI_API_KEY`; never commit the key.
 
-### Known Limitations
+SerpAPI rows are written to monthly `weather_snapshots.csv` files. Only parsed fields needed for analysis are retained; full API JSON responses are deliberately discarded. Snapshot keys include capture timestamp, city, and label, so morning and midday captures are retained independently.
 
-* **Only dates through today are stored.** Future flight dates are intentionally excluded because this dataset is for observed/historical daily context, not forecast snapshots.
-* **Grid-cell, not airport-station, values.** Open-Meteo returns model grid-cell estimates (9–25 km); for coastal cities (`BOM`, `MAA`, `COK`, `VTZ`, `STV`) the selected land grid cell may differ from airport conditions.
-* **Reproducibility tiers differ.** Historical Forecast rows are archived operational model output and can shift slightly if re-fetched after upstream model upgrades; the ERA5 tier is the stable long-term-consistency option.
-* **Holiday coverage is 2001–2035.** `python-holidays` derives India dates from archived government and secondary calendar sources; some Hindu/Islamic lunar holidays are astronomically estimated and flagged `(estimated)` by the library. The collector fails loudly for years outside the supported range.
-* **Holiday rows are append-only.** Storage upserts by key and never deletes. If the pinned `holidays` version is later bumped and a holiday's name or estimated date changes, superseded rows can persist — regenerate the affected `data/YYYY/MM/holidays.csv` files from scratch after a version bump.
+Open-Meteo weather data requires CC BY 4.0 attribution. See https://open-meteo.com/en/license and cite Zippenfenig, P. (2023), *Open-Meteo.com Weather API*, https://doi.org/10.5281/ZENODO.7970649. The free service is intended for non-commercial use and has no uptime guarantee; use a suitable subscription for commercial operation.
+
+### Holidays and festivals
+
+The deterministic baseline is `python-holidays` with India subdivisions for the configured states and union territory. It is local, MIT-licensed, and avoids one request per date. Optional Calendarific enrichment can be enabled with `CALENDARIFIC_API_KEY`; source-specific rows and disagreements are preserved instead of silently overwriting the baseline.
+
+Nager.Date and the community Indian Festivals API are treated as optional enrichment candidates, not authoritative replacements. Nager.Date exposes annual holiday responses with subdivision codes and holiday types, but India subdivision completeness must be checked for each requested year. The Indian Festivals API provides useful state-wise cultural/festival enrichment for 2025–2040, but it is static community data and lunar/observance dates can vary. Official central and state notifications remain the strongest authority when an exact annual gazette is required.
+
+### Calendar
+
+Weekday and weekend values are generated locally from the Gregorian calendar and require no external API.
+
+## Data quality and limitations
+
+- Validation rejects invalid city codes, malformed dates, duplicate city/date keys, and unexpected API cardinality.
+- Weather values are grid-cell model/reanalysis estimates, not necessarily airport-station observations.
+- Open-Meteo and SerpAPI values must remain distinguishable through provenance.
+- Lunar and regional holiday dates may be estimated or revised after official notifications.
+- When the pinned holiday library is upgraded, regenerate affected holiday partitions if historical names or estimated dates change.
+
+## Automation
+
+The collector is designed for a twice-daily cron or GitHub Actions schedule. The VM uses 00:30 and 06:30 UTC, equivalent to 06:00 and 12:00 IST, without changing the shared VM timezone. Each run commits and pushes successful CSV/source changes using the dedicated GitHub deploy key; failures remain in VM logs and successful data is still pushed. Existing unrelated flight-scraper cron jobs remain untouched.

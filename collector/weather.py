@@ -108,6 +108,7 @@ def missing_weather_dates(existing_rows, start, end, today):
     for row in existing_rows:
         present[(row.get("City_Code", ""), row.get("Date", ""))] = row.get("Weather_Source", "")
     missing = set()
+    end = min(end, today - timedelta(days=1))
     current = start
     while current <= end:
         iso = current.isoformat()

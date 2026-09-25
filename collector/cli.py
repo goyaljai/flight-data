@@ -7,6 +7,7 @@ from . import storage
 from .calendar_data import CALENDAR_FIELDS, calendar_rows, parse_date
 from .config import DEFAULT_START_DATE, calendarific_key
 from .holidays import HOLIDAY_FIELDS, holiday_rows
+from .serpapi import SNAPSHOT_FIELDS, collect_snapshots
 from .weather import WEATHER_FIELDS, ist_today, missing_weather_dates, weather_rows
 
 logger = logging.getLogger(__name__)
@@ -32,6 +33,8 @@ def main(argv=None):
     parser.add_argument("--incremental", action="store_true",
                         help="skip work where existing CSVs already cover the range")
     parser.add_argument("--verbose", action="store_true", help="debug logging")
+    parser.add_argument("--serpapi-label", choices=("morning", "midday"),
+                        help="collect a SerpAPI current-weather snapshot with this label")
     args = parser.parse_args(argv)
 
     logging.basicConfig(
@@ -51,7 +54,26 @@ def main(argv=None):
         _collect_holidays(args.start, end)
     if "weather" in datasets:
         _collect_weather(args.start, end, today, args.incremental)
+    if args.serpapi_label:
+        _collect_serpapi(args.serpapi_label)
     return 0
+
+
+def _collect_serpapi(label):
+    from .config import serpapi_key
+    try:
+        rows = collect_snapshots(serpapi_key(), label)
+    except Exception as exc:
+        storage.log_failure("serpapi", label, str(exc))
+        raise SystemExit("serpapi: snapshot collection failed; see failures.log")
+    if not rows:
+        return
+    day = parse_date(rows[0]["Date"])
+    path = storage.month_path(day, "weather_snapshots.csv")
+    added, total = storage.upsert_snapshot_rows(
+        path, rows, ("Capture_Timestamp", "City_Code", "Capture_Label"), SNAPSHOT_FIELDS
+    )
+    logger.info("serpapi %s: +%d rows (total %d)", label, added, total)
 
 
 def _collect_calendar(start, end, incremental):

@@ -108,3 +108,7 @@ def upsert_monthly(path, new_rows, key_fields, fieldnames, validator, kind):
     combined.sort(key=lambda r: tuple(r.get(k, "") for k in key_fields))
     write_rows(path, combined, fieldnames)
     return added, len(combined)
+
+
+def upsert_snapshot_rows(path, new_rows, key_fields, fieldnames):
+    return upsert_monthly(path, new_rows, key_fields, fieldnames, lambda row: None, "serpapi_snapshot")

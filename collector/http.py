@@ -31,9 +31,14 @@ def get_json(url, params, *, context="request"):
             continue
         if response.status_code == 200:
             try:
-                return response.json()
+                payload = response.json()
             except ValueError as exc:
                 raise HttpError(f"{context}: invalid JSON response: {exc}") from exc
+            if isinstance(payload, dict) and payload.get("error"):
+                raise HttpError(f"{context}: API error: {payload.get('error')}")
+            if not isinstance(payload, (dict, list)):
+                raise HttpError(f"{context}: invalid response")
+            return payload
         if response.status_code in _RETRYABLE_STATUSES:
             retry_after = response.headers.get("Retry-After")
             last_error = f"{context}: HTTP {response.status_code}"
