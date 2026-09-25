@@ -8,7 +8,7 @@ This standalone Python collector produces one clean monthly CSV per month for 15
 data/YYYY/MM/daily_context.csv
 ```
 
-The old `calendar.csv`, `holidays.csv`, `weather.csv`, `weather_snapshots.csv`, and macOS `._*` sidecar files are migration-only inputs and are removed after the combined file is built. Raw SerpAPI JSON is never retained.
+Only `daily_context.csv` is published to GitHub. The collector may use private migration/runtime inputs locally, but `calendar.csv`, `holidays.csv`, `weather.csv`, `weather_snapshots.csv`, and macOS `._*` sidecars are ignored and removed from Git tracking. Raw SerpAPI JSON is never retained.
 
 ## Operation
 
