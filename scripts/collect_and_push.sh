@@ -8,7 +8,9 @@ LOG_DIR="$PROJECT/logs"
 LABEL=${1:?snapshot label required}
 
 umask 077
+set -a
 . "$ENV_FILE"
+set +a
 cd "$PROJECT"
 mkdir -p "$LOG_DIR"
 
