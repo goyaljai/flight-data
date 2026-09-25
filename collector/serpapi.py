@@ -1,5 +1,6 @@
 """Optional SerpAPI current-weather snapshots parsed into CSV rows."""
 import logging
+import time
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
@@ -23,28 +24,32 @@ def collect_snapshots(api_key, label):
     rows = []
     for city in CITIES:
         context = f"serpapi weather {city.code} {label}"
-        try:
-            payload = get_json(
-                SERPAPI_URL,
-                params={"engine": "google", "q": f"weather {city.name} India", "api_key": api_key, "gl": "in", "hl": "en", "device": "desktop"},
-                context=context,
-            )
-            weather = _weather_result(payload)
-            if not weather:
-                raise HttpError(f"{context}: weather_result missing")
-            rows.append(_row(city, captured, label, weather))
-        except HttpError as exc:
-            logger.warning("%s: skipped: %s", context, exc)
-            continue
+        for attempt, query in enumerate((f"weather {city.name} India", f"weather in {city.name}", f"{city.name} weather"), 1):
+            try:
+                payload = get_json(
+                    SERPAPI_URL,
+                    params={"engine": "google", "q": query, "api_key": api_key, "gl": "in", "hl": "en", "device": "desktop", "no_cache": "true" if attempt > 1 else "false"},
+                    context=f"{context} attempt {attempt}",
+                )
+                weather = _weather_result(payload)
+                if not weather:
+                    raise HttpError(f"{context}: weather_result missing")
+                rows.append(_row(city, captured, label, weather))
+                break
+            except (HttpError, AttributeError, TypeError) as exc:
+                logger.warning("%s attempt %d failed: %s", context, attempt, exc)
+                if attempt == 3:
+                    continue
+                time.sleep(0.5)
     return rows
 
 
 def _weather_result(payload):
     answer = payload.get("answer_box", {}) if isinstance(payload, dict) else {}
-    if answer.get("type") == "weather_result" or "temperature" in answer:
-        return answer
-    for item in payload.get("answer_box_list", []) if isinstance(payload, dict) else []:
-        if item.get("type") == "weather_result" or "temperature" in item:
+    candidates = answer if isinstance(answer, list) else [answer]
+    candidates += payload.get("answer_box_list", []) if isinstance(payload, dict) else []
+    for item in candidates:
+        if isinstance(item, dict) and (item.get("type") == "weather_result" or (item.get("temperature") is not None and (item.get("weather") or item.get("location")))):
             return item
     return None
 
