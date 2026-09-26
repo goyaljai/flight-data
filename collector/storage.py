@@ -6,7 +6,7 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
-from .config import DATA_ROOT, FAILURE_LOG, VALID_CITY_CODES
+from .config import DATA_ROOT, FAILURE_LOG, PUBLISHED_DATA_ROOT, VALID_CITY_CODES
 from .calendar_data import parse_date
 
 logger = logging.getLogger(__name__)
@@ -18,6 +18,14 @@ def month_dir(day):
 
 def month_path(day, name):
     return month_dir(day) / name
+
+
+def runtime_month_path(day, name):
+    return DATA_ROOT / f"{day.year:04d}" / f"{day.month:02d}" / name
+
+
+def published_month_path(day):
+    return PUBLISHED_DATA_ROOT / f"{day.year:04d}" / f"{day.month:02d}" / "daily_context.csv"
 
 
 def month_range(start, end):

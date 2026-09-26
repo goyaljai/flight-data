@@ -1,47 +1,43 @@
-"""Optional SerpAPI current-weather snapshots parsed into CSV rows."""
+"""SerpAPI live slot observations."""
 import logging
 import time
-from datetime import datetime
+from datetime import datetime, time as clock_time
 from zoneinfo import ZoneInfo
 
-from .config import CITIES, DATA_ROOT
+from .config import CITIES, SLOT_HOURS, SLOT_LATE_AFTERNOON, SLOT_MORNING
 from .http import HttpError, get_json
 
 logger = logging.getLogger(__name__)
 SERPAPI_URL = "https://serpapi.com/search.json"
-SNAPSHOT_FIELDS = (
-    "Capture_Timestamp", "Date", "City", "City_Code", "Capture_Label",
-    "Temperature_C", "Weather_Condition", "Precipitation_Probability",
-    "Humidity_Percent", "Wind_Speed", "Location", "Source", "Raw_JSON_Path",
-)
+SNAPSHOT_FIELDS = ("Date", "City", "City_Code", "Capture_Timestamp", "Capture_Label", "Captured_At", "Temperature_C", "Humidity_Percent", "Precipitation_Probability", "Wind_Speed", "Weather_Code", "Weather_Condition", "Capture_Source")
 
 
-def collect_snapshots(api_key, label):
+def collect_snapshots(api_key, label, day=None):
     if not api_key:
-        logger.info("serpapi: no key configured; skipping %s snapshot", label)
         return []
-    captured = datetime.now(ZoneInfo("Asia/Kolkata"))
+    now = datetime.now(ZoneInfo("Asia/Kolkata"))
+    day = day or now.date()
+    scheduled = datetime.combine(day, clock_time(SLOT_HOURS[label], 0), ZoneInfo("Asia/Kolkata")).isoformat(timespec="seconds")
     rows = []
     for city in CITIES:
-        context = f"serpapi weather {city.code} {label}"
+        result = None
         for attempt, query in enumerate((f"weather {city.name} India", f"weather in {city.name}", f"{city.name} weather"), 1):
             try:
-                payload = get_json(
-                    SERPAPI_URL,
-                    params={"engine": "google", "q": query, "api_key": api_key, "gl": "in", "hl": "en", "device": "desktop", "no_cache": "true" if attempt > 1 else "false"},
-                    context=f"{context} attempt {attempt}",
-                )
-                weather = _weather_result(payload)
-                if not weather:
-                    raise HttpError(f"{context}: weather_result missing")
-                rows.append(_row(city, captured, label, weather))
-                break
-            except (HttpError, AttributeError, TypeError) as exc:
-                logger.warning("%s attempt %d failed: %s", context, attempt, exc)
-                if attempt == 3:
-                    continue
-                time.sleep(0.5)
+                payload = get_json(SERPAPI_URL, {"engine": "google", "q": query, "api_key": api_key, "gl": "in", "hl": "en", "device": "desktop", "no_cache": "true" if attempt > 1 else "false"}, context=f"SerpAPI {city.code} {label} attempt {attempt}")
+                result = _weather_result(payload)
+                if result:
+                    break
+                raise HttpError("weather result missing")
+            except (HttpError, TypeError, AttributeError) as exc:
+                logger.warning("SerpAPI %s %s attempt %d failed: %s", city.code, label, attempt, exc)
+                if attempt < 3:
+                    time.sleep(0.5)
+        rows.append(_row(city, day, label, scheduled, now, result))
     return rows
+
+
+def _row(city, day, label, scheduled, captured, weather):
+    return {"Date": day.isoformat(), "City": city.name, "City_Code": city.code, "Capture_Timestamp": scheduled, "Capture_Label": label, "Captured_At": captured.isoformat(timespec="seconds"), "Temperature_C": _number(weather.get("temperature")) if weather else "", "Humidity_Percent": _number(weather.get("humidity")) if weather else "", "Precipitation_Probability": _number(weather.get("precipitation")) if weather else "", "Wind_Speed": _number(weather.get("wind")) if weather else "", "Weather_Code": "", "Weather_Condition": weather.get("weather", "") if weather else "", "Capture_Source": "serpapi-google-weather" if weather else "unavailable"}
 
 
 def _weather_result(payload):
@@ -54,35 +50,8 @@ def _weather_result(payload):
     return None
 
 
-def _row(city, captured, label, weather):
-    return {
-        "Capture_Timestamp": captured.isoformat(timespec="seconds"),
-        "Date": captured.date().isoformat(),
-        "City": city.name,
-        "City_Code": city.code,
-        "Capture_Label": label,
-        "Temperature_C": _temperature_c(weather.get("temperature"), weather.get("unit")),
-        "Weather_Condition": weather.get("weather", ""),
-        "Precipitation_Probability": _number(weather.get("precipitation")),
-        "Humidity_Percent": _number(weather.get("humidity")),
-        "Wind_Speed": weather.get("wind", ""),
-        "Location": weather.get("location", ""),
-        "Source": "serpapi-google-weather",
-        "Raw_JSON_Path": "",
-    }
-
-
 def _number(value):
     if value is None:
         return ""
-    return "".join(c for c in str(value) if c.isdigit() or c in ".-")
-
-
-def _temperature_c(value, unit):
-    try:
-        number = float(value)
-    except (TypeError, ValueError):
-        return ""
-    if str(unit).lower().startswith("fahrenheit"):
-        return round((number - 32) * 5 / 9, 2)
-    return number
+    text = "".join(char for char in str(value) if char.isdigit() or char in ".-")
+    return float(text) if text else ""

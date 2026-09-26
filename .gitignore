@@ -17,3 +17,5 @@ data/*/*/weather.csv
 data/*/*/weather_snapshots.csv
 ._*
 **/._*
+logs/
+.runtime/

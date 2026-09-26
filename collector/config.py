@@ -1,31 +1,29 @@
-"""Configuration: city metadata, subdivision mapping, environment settings."""
+"""Configuration and city metadata for the daily context collector."""
 import os
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DATA_ROOT = PROJECT_ROOT / "data"
-FAILURE_LOG = DATA_ROOT / "failures.log"
-
+RUNTIME_ROOT = Path(os.environ.get("COLLECTOR_RUNTIME_ROOT", str(PROJECT_ROOT / ".runtime")))
+RUNTIME_DATA_ROOT = RUNTIME_ROOT / "data"
+PUBLISHED_DATA_ROOT = Path(os.environ.get("COLLECTOR_PUBLISHED_ROOT", str(PROJECT_ROOT / "data")))
+DATA_ROOT = RUNTIME_DATA_ROOT
+FAILURE_LOG = RUNTIME_ROOT / "failures.log"
 DEFAULT_START_DATE = date(2026, 6, 1)
 OPEN_METEO_HISTORICAL_URL = "https://archive-api.open-meteo.com/v1/archive"
 OPEN_METEO_HISTORICAL_FORECAST_URL = "https://historical-forecast-api.open-meteo.com/v1/forecast"
 HISTORICAL_FORECAST_MIN_DATE = date(2022, 1, 1)
-
 CALENDARIFIC_API_URL = "https://calendarific.com/api/v2/holidays"
 HOLIDAYS_MIN_YEAR = 2001
 HOLIDAYS_MAX_YEAR = 2035
-
 HTTP_TIMEOUT_SECONDS = 60
 HTTP_MAX_RETRIES = 4
 HTTP_BACKOFF_BASE_SECONDS = 2.0
-
-VALID_CITY_CODES = (
-    "BOM", "DEL", "BLR", "HYD", "MAA", "CCU", "PNQ", "AMD",
-    "STV", "VTZ", "JAI", "COK", "IXC", "IDR", "LKO",
-)
-
+SLOT_MORNING = "morning"
+SLOT_LATE_AFTERNOON = "late_afternoon"
+SLOT_HOURS = {SLOT_MORNING: 9, SLOT_LATE_AFTERNOON: 17}
+VALID_CITY_CODES = ("BOM", "DEL", "BLR", "HYD", "MAA", "CCU", "PNQ", "AMD", "STV", "VTZ", "JAI", "COK", "IXC", "IDR", "LKO")
 
 @dataclass(frozen=True)
 class City:
@@ -35,7 +33,6 @@ class City:
     longitude: float
     subdiv: str
     region: str
-
 
 CITIES = (
     City("BOM", "Mumbai", 19.0760, 72.8777, "MH", "Maharashtra"),
@@ -54,13 +51,10 @@ CITIES = (
     City("IDR", "Indore", 22.7196, 75.8577, "MP", "Madhya Pradesh"),
     City("LKO", "Lucknow", 26.8467, 80.9462, "UP", "Uttar Pradesh"),
 )
+CITY_BY_CODE = {city.code: city for city in CITIES}
 
-CITY_BY_CODE = {c.code: c for c in CITIES}
-
-
-def serpapi_key() -> str:
+def serpapi_key():
     return os.environ.get("SERPAPI_API_KEY", "").strip()
 
-
-def calendarific_key() -> str:
+def calendarific_key():
     return os.environ.get("CALENDARIFIC_API_KEY", "").strip()
