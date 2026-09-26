@@ -12,6 +12,7 @@ set -a
 . "$ENV_FILE"
 set +a
 mkdir -p "$LOG_DIR"
+cd "$PROJECT"
 
 status=0
 if ! "$PROJECT/.venv/bin/python" -m collector --incremental --serpapi-label "$LABEL"; then
