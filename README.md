@@ -1,6 +1,6 @@
 # India Daily Context Dataset
 
-This standalone Python collector publishes monthly `daily_context.csv` files for 15 Indian cities. Each observed city/date has two rows: `morning` at 09:00 IST and `late_afternoon` at 17:00 IST.
+This standalone Python collector publishes monthly `daily_context.csv` files for 15 Indian cities. Each observed city/date has two rows: `morning` at 09:00 IST and `late_afternoon` at 18:00 IST.
 
 ## Published data
 
@@ -8,13 +8,13 @@ This standalone Python collector publishes monthly `daily_context.csv` files for
 data/YYYY/MM/daily_context.csv
 ```
 
-Rows retain `Date` and `City_Code` for daily joins and use `City_Code` plus scheduled `Capture_Timestamp` as the slot key. The CSV contains repeated daily weather/calendar/holiday fields and normalized slot fields: temperature, humidity, precipitation probability, wind speed, weather code, condition text, `Capture_Source`, and `Captured_At`.
+Rows retain `Date` and `City_Code` for daily joins and use `City_Code` plus scheduled `Capture_Timestamp` as the slot key. The CSV contains repeated daily weather/calendar/holiday fields and normalized provider-neutral slot fields: temperature, humidity, precipitation probability, wind speed, weather code, condition text, and `Captured_At`.
 
 The city codes are `BOM`, `DEL`, `BLR`, `HYD`, `MAA`, `CCU`, `PNQ`, `AMD`, `STV`, `VTZ`, `JAI`, `COK`, `IXC`, `IDR`, and `LKO`.
 
 ## Sources
 
-Open-Meteo supplies daily historical weather and historical hourly values for the two slot times. SerpAPI supplies live slot observations. Historical slot rows are labeled `open-meteo-historical-hourly-backfill`; live rows are labeled `serpapi-google-weather`; failed live slots are labeled `unavailable` and retain blank observation fields. No random or fabricated values are inserted.
+Open-Meteo supplies daily historical weather and historical hourly values for the two slot times. SerpAPI supplies live slot observations. Both sources populate the same provider-neutral published columns. Provider provenance remains private in runtime data and logs. Failed live slots retain blank observation fields. No random or fabricated values are inserted.
 
 Calendar weekday/weekend values are generated locally. Indian holidays use `python-holidays` with state subdivisions. `CALENDARIFIC_API_KEY` is optional and is not required for the baseline collector.
 
@@ -24,7 +24,7 @@ The VM remains in UTC and cron runs at:
 
 ```text
 03:30 UTC = 09:00 IST
-11:45 UTC = 17:15 IST
+12:30 UTC = 18:00 IST
 ```
 
 Each run loads the root-only `SERPAPI_API_KEY`, collects incrementally, writes private source state under `/var/lib/jai-dontdelete`, publishes only `data/YYYY/MM/daily_context.csv`, commits changed outputs, and pushes to GitHub. The runtime source state is separate from the Git checkout.

@@ -11,9 +11,9 @@ DAILY_CONTEXT_FIELDS = (
     "Date", "City", "City_Code", "Capture_Timestamp", "Capture_Label", "Captured_At",
     "Latitude", "Longitude", "Day_of_Week", "Is_Weekend",
     "Temperature_Max_C", "Temperature_Min_C", "Temperature_Mean_C", "Apparent_Temperature_Max_C", "Apparent_Temperature_Min_C",
-    "Precipitation_Sum_MM", "Rain_Sum_MM", "Precipitation_Hours", "Wind_Speed_Max_KMH", "Wind_Gusts_Max_KMH", "Wind_Direction_Dominant_Deg", "Weather_Code", "Weather_Source",
+    "Precipitation_Sum_MM", "Rain_Sum_MM", "Precipitation_Hours", "Wind_Speed_Max_KMH", "Wind_Gusts_Max_KMH", "Wind_Direction_Dominant_Deg", "Weather_Code",
     "Holiday_Names", "Holiday_Types", "Holiday_Regions", "Holiday_Sources", "Is_Holiday",
-    "Slot_Temperature_C", "Slot_Humidity_Percent", "Slot_Precipitation_Probability_Percent", "Slot_Wind_Speed_KMH", "Slot_Weather_Code", "Slot_Condition_Text", "Capture_Source",
+    "Slot_Temperature_C", "Slot_Humidity_Percent", "Slot_Precipitation_Probability_Percent", "Slot_Wind_Speed_KMH", "Slot_Weather_Code", "Slot_Condition_Text",
 )
 SLOT_FIELDS = ("Temperature_C", "Humidity_Percent", "Precipitation_Probability", "Wind_Speed", "Weather_Code", "Weather_Condition", "Capture_Source", "Captured_At")
 
@@ -46,10 +46,10 @@ def build_daily_context_rows(year, month, through=None):
             for label in (SLOT_MORNING, SLOT_LATE_AFTERNOON):
                 snapshot = snapshots.get((city.code, day_text, label), {})
                 row = {field: "" for field in DAILY_CONTEXT_FIELDS}
-                row.update({field: source.get(field, "") for field in ("Date", "City", "City_Code", "Latitude", "Longitude", "Temperature_Max_C", "Temperature_Min_C", "Temperature_Mean_C", "Apparent_Temperature_Max_C", "Apparent_Temperature_Min_C", "Precipitation_Sum_MM", "Rain_Sum_MM", "Precipitation_Hours", "Wind_Speed_Max_KMH", "Wind_Gusts_Max_KMH", "Wind_Direction_Dominant_Deg", "Weather_Code", "Weather_Source")})
+                row.update({field: source.get(field, "") for field in ("Date", "City", "City_Code", "Latitude", "Longitude", "Temperature_Max_C", "Temperature_Min_C", "Temperature_Mean_C", "Apparent_Temperature_Max_C", "Apparent_Temperature_Min_C", "Precipitation_Sum_MM", "Rain_Sum_MM", "Precipitation_Hours", "Wind_Speed_Max_KMH", "Wind_Gusts_Max_KMH", "Wind_Direction_Dominant_Deg", "Weather_Code")})
                 row.update({"Date": day_text, "City": city.name, "City_Code": city.code, "Capture_Timestamp": scheduled_timestamp(day, label), "Capture_Label": label, "Latitude": city.latitude, "Longitude": city.longitude, "Day_of_Week": cal.get("Day_of_Week", day.strftime("%A")), "Is_Weekend": cal.get("Is_Weekend", "true" if day.weekday() >= 5 else "false")})
                 row.update({"Holiday_Names": "; ".join(r.get("Holiday_Name", "") for r in applicable), "Holiday_Types": "; ".join(r.get("Holiday_Type", "") for r in applicable), "Holiday_Regions": "; ".join(r.get("State_Region", "") for r in applicable), "Holiday_Sources": "; ".join(r.get("Source", "") for r in applicable), "Is_Holiday": "true" if applicable else "false"})
-                row.update({"Captured_At": snapshot.get("Captured_At", ""), "Slot_Temperature_C": snapshot.get("Temperature_C", ""), "Slot_Humidity_Percent": snapshot.get("Humidity_Percent", ""), "Slot_Precipitation_Probability_Percent": snapshot.get("Precipitation_Probability", ""), "Slot_Wind_Speed_KMH": snapshot.get("Wind_Speed", ""), "Slot_Weather_Code": snapshot.get("Weather_Code", ""), "Slot_Condition_Text": snapshot.get("Weather_Condition", ""), "Capture_Source": snapshot.get("Capture_Source", "unavailable") if snapshot else "unavailable"})
+                row.update({"Captured_At": snapshot.get("Captured_At", ""), "Slot_Temperature_C": snapshot.get("Temperature_C", ""), "Slot_Humidity_Percent": snapshot.get("Humidity_Percent", ""), "Slot_Precipitation_Probability_Percent": snapshot.get("Precipitation_Probability", ""), "Slot_Wind_Speed_KMH": snapshot.get("Wind_Speed", ""), "Slot_Weather_Code": snapshot.get("Weather_Code", ""), "Slot_Condition_Text": snapshot.get("Weather_Condition", "")})
                 rows.append(row)
         day = date.fromordinal(day.toordinal() + 1)
     return rows
