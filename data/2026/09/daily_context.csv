@@ -750,32 +750,32 @@ Date,City,City_Code,Capture_Timestamp,Capture_Label,Captured_At,Latitude,Longitu
 2026-09-25,Lucknow,LKO,2026-09-25T09:00:00+05:30,morning,,26.8467,80.9462,Friday,false,23.6,22.1,22.8,27.0,23.2,93.8,54.2,24.0,27.3,64.4,46,95,open-meteo-historical-forecast,,,,,false,23.0,91,98,20.7,53,moderate_drizzle,open-meteo-historical-hourly-backfill
 2026-09-25,Lucknow,LKO,2026-09-25T17:00:00+05:30,late_afternoon,,26.8467,80.9462,Friday,false,23.6,22.1,22.8,27.0,23.2,93.8,54.2,24.0,27.3,64.4,46,95,open-meteo-historical-forecast,,,,,false,22.5,94,100,18.4,81,moderate_rain_showers,open-meteo-historical-hourly-backfill
 2026-09-26,Mumbai,BOM,2026-09-26T09:00:00+05:30,morning,,19.076,72.8777,Saturday,true,,,,,,,,,,,,,,,,,,false,,,,,,,unavailable
-2026-09-26,Mumbai,BOM,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:00:14+05:30,19.076,72.8777,Saturday,true,,,,,,,,,,,,,,,,,,false,31.0,69.0,15.0,14.0,,Partly sunny,serpapi-google-weather
+2026-09-26,Mumbai,BOM,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:03:41+05:30,19.076,72.8777,Saturday,true,,,,,,,,,,,,,,,,,,false,31.0,69.0,15.0,14.0,,Partly sunny,serpapi-google-weather
 2026-09-26,Delhi,DEL,2026-09-26T09:00:00+05:30,morning,,28.7041,77.1025,Saturday,true,,,,,,,,,,,,,,,,,,false,,,,,,,unavailable
-2026-09-26,Delhi,DEL,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:00:14+05:30,28.7041,77.1025,Saturday,true,,,,,,,,,,,,,,,,,,false,26.0,71.0,15.0,13.0,,Partly sunny,serpapi-google-weather
+2026-09-26,Delhi,DEL,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:03:41+05:30,28.7041,77.1025,Saturday,true,,,,,,,,,,,,,,,,,,false,26.0,71.0,15.0,13.0,,Partly sunny,serpapi-google-weather
 2026-09-26,Bengaluru,BLR,2026-09-26T09:00:00+05:30,morning,,12.9716,77.5946,Saturday,true,,,,,,,,,,,,,,,,,,false,,,,,,,unavailable
-2026-09-26,Bengaluru,BLR,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:00:14+05:30,12.9716,77.5946,Saturday,true,,,,,,,,,,,,,,,,,,false,28.0,51.0,5.0,10.0,,Partly sunny,serpapi-google-weather
+2026-09-26,Bengaluru,BLR,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:03:41+05:30,12.9716,77.5946,Saturday,true,,,,,,,,,,,,,,,,,,false,28.0,51.0,5.0,10.0,,Partly sunny,serpapi-google-weather
 2026-09-26,Hyderabad,HYD,2026-09-26T09:00:00+05:30,morning,,17.385,78.4867,Saturday,true,,,,,,,,,,,,,,,,,,false,,,,,,,unavailable
-2026-09-26,Hyderabad,HYD,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:00:14+05:30,17.385,78.4867,Saturday,true,,,,,,,,,,,,,,,,,,false,31.0,53.0,10.0,10.0,,Mostly cloudy,serpapi-google-weather
+2026-09-26,Hyderabad,HYD,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:03:41+05:30,17.385,78.4867,Saturday,true,,,,,,,,,,,,,,,,,,false,31.0,53.0,10.0,10.0,,Mostly cloudy,serpapi-google-weather
 2026-09-26,Chennai,MAA,2026-09-26T09:00:00+05:30,morning,,13.0827,80.2707,Saturday,true,,,,,,,,,,,,,,,,,,false,,,,,,,unavailable
-2026-09-26,Chennai,MAA,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:00:14+05:30,13.0827,80.2707,Saturday,true,,,,,,,,,,,,,,,,,,false,32.0,73.0,15.0,13.0,,Partly sunny,serpapi-google-weather
+2026-09-26,Chennai,MAA,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:03:41+05:30,13.0827,80.2707,Saturday,true,,,,,,,,,,,,,,,,,,false,32.0,73.0,15.0,13.0,,Partly sunny,serpapi-google-weather
 2026-09-26,Kolkata,CCU,2026-09-26T09:00:00+05:30,morning,,22.5726,88.3639,Saturday,true,,,,,,,,,,,,,,,,,,false,,,,,,,unavailable
-2026-09-26,Kolkata,CCU,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:00:14+05:30,22.5726,88.3639,Saturday,true,,,,,,,,,,,,,,,,,,false,29.0,83.0,15.0,11.0,,Mostly sunny,serpapi-google-weather
+2026-09-26,Kolkata,CCU,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:03:41+05:30,22.5726,88.3639,Saturday,true,,,,,,,,,,,,,,,,,,false,29.0,83.0,15.0,11.0,,Mostly sunny,serpapi-google-weather
 2026-09-26,Pune,PNQ,2026-09-26T09:00:00+05:30,morning,,18.5204,73.8567,Saturday,true,,,,,,,,,,,,,,,,,,false,,,,,,,unavailable
-2026-09-26,Pune,PNQ,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:00:14+05:30,18.5204,73.8567,Saturday,true,,,,,,,,,,,,,,,,,,false,28.0,64.0,0.0,16.0,,Cloudy,serpapi-google-weather
+2026-09-26,Pune,PNQ,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:03:41+05:30,18.5204,73.8567,Saturday,true,,,,,,,,,,,,,,,,,,false,28.0,64.0,0.0,16.0,,Cloudy,serpapi-google-weather
 2026-09-26,Ahmedabad,AMD,2026-09-26T09:00:00+05:30,morning,,23.0225,72.5714,Saturday,true,,,,,,,,,,,,,,,,,,false,,,,,,,unavailable
-2026-09-26,Ahmedabad,AMD,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:00:14+05:30,23.0225,72.5714,Saturday,true,,,,,,,,,,,,,,,,,,false,32.0,50.0,10.0,14.0,,Mostly cloudy,serpapi-google-weather
+2026-09-26,Ahmedabad,AMD,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:03:41+05:30,23.0225,72.5714,Saturday,true,,,,,,,,,,,,,,,,,,false,32.0,50.0,10.0,14.0,,Mostly cloudy,serpapi-google-weather
 2026-09-26,Surat,STV,2026-09-26T09:00:00+05:30,morning,,21.1702,72.8311,Saturday,true,,,,,,,,,,,,,,,,,,false,,,,,,,unavailable
-2026-09-26,Surat,STV,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:00:14+05:30,21.1702,72.8311,Saturday,true,,,,,,,,,,,,,,,,,,false,29.0,73.0,0.0,23.0,,Partly sunny,serpapi-google-weather
+2026-09-26,Surat,STV,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:03:41+05:30,21.1702,72.8311,Saturday,true,,,,,,,,,,,,,,,,,,false,29.0,73.0,0.0,23.0,,Partly sunny,serpapi-google-weather
 2026-09-26,Visakhapatnam,VTZ,2026-09-26T09:00:00+05:30,morning,,17.6868,83.2185,Saturday,true,,,,,,,,,,,,,,,,,,false,,,,,,,unavailable
-2026-09-26,Visakhapatnam,VTZ,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:00:14+05:30,17.6868,83.2185,Saturday,true,,,,,,,,,,,,,,,,,,false,31.0,76.0,0.0,19.0,,Partly sunny,serpapi-google-weather
+2026-09-26,Visakhapatnam,VTZ,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:03:41+05:30,17.6868,83.2185,Saturday,true,,,,,,,,,,,,,,,,,,false,31.0,76.0,0.0,19.0,,Partly sunny,serpapi-google-weather
 2026-09-26,Jaipur,JAI,2026-09-26T09:00:00+05:30,morning,,26.9124,75.7873,Saturday,true,,,,,,,,,,,,,,,,,,false,,,,,,,unavailable
-2026-09-26,Jaipur,JAI,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:00:14+05:30,26.9124,75.7873,Saturday,true,,,,,,,,,,,,,,,,,,false,32.0,49.0,0.0,13.0,,Mostly sunny,serpapi-google-weather
+2026-09-26,Jaipur,JAI,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:03:41+05:30,26.9124,75.7873,Saturday,true,,,,,,,,,,,,,,,,,,false,32.0,49.0,0.0,13.0,,Mostly sunny,serpapi-google-weather
 2026-09-26,Kochi,COK,2026-09-26T09:00:00+05:30,morning,,9.9312,76.2673,Saturday,true,,,,,,,,,,,,,,,,,,false,,,,,,,unavailable
-2026-09-26,Kochi,COK,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:00:14+05:30,9.9312,76.2673,Saturday,true,,,,,,,,,,,,,,,,,,false,29.0,75.0,5.0,14.0,,Partly sunny,serpapi-google-weather
+2026-09-26,Kochi,COK,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:03:41+05:30,9.9312,76.2673,Saturday,true,,,,,,,,,,,,,,,,,,false,29.0,75.0,5.0,14.0,,Partly sunny,serpapi-google-weather
 2026-09-26,Chandigarh,IXC,2026-09-26T09:00:00+05:30,morning,,30.7333,76.7794,Saturday,true,,,,,,,,,,,,,,,,,,false,,,,,,,unavailable
-2026-09-26,Chandigarh,IXC,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:00:14+05:30,30.7333,76.7794,Saturday,true,,,,,,,,,,,,,,,,,,false,29.0,63.0,15.0,5.0,,Sunny,serpapi-google-weather
+2026-09-26,Chandigarh,IXC,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:03:41+05:30,30.7333,76.7794,Saturday,true,,,,,,,,,,,,,,,,,,false,29.0,63.0,15.0,5.0,,Sunny,serpapi-google-weather
 2026-09-26,Indore,IDR,2026-09-26T09:00:00+05:30,morning,,22.7196,75.8577,Saturday,true,,,,,,,,,,,,,,,,,,false,,,,,,,unavailable
-2026-09-26,Indore,IDR,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:00:14+05:30,22.7196,75.8577,Saturday,true,,,,,,,,,,,,,,,,,,false,28.0,61.0,0.0,21.0,,Partly sunny,serpapi-google-weather
+2026-09-26,Indore,IDR,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:03:41+05:30,22.7196,75.8577,Saturday,true,,,,,,,,,,,,,,,,,,false,28.0,61.0,0.0,21.0,,Partly sunny,serpapi-google-weather
 2026-09-26,Lucknow,LKO,2026-09-26T09:00:00+05:30,morning,,26.8467,80.9462,Saturday,true,,,,,,,,,,,,,,,,,,false,,,,,,,unavailable
-2026-09-26,Lucknow,LKO,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:00:14+05:30,26.8467,80.9462,Saturday,true,,,,,,,,,,,,,,,,,,false,25.0,95.0,65.0,26.0,,Light rain,serpapi-google-weather
+2026-09-26,Lucknow,LKO,2026-09-26T17:00:00+05:30,late_afternoon,2026-09-26T17:03:41+05:30,26.8467,80.9462,Saturday,true,,,,,,,,,,,,,,,,,,false,25.0,95.0,65.0,26.0,,Light rain,serpapi-google-weather
