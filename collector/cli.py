@@ -38,10 +38,10 @@ def main(argv=None):
         _collect_calendar(args.start, end, args.incremental)
     if "holidays" in datasets:
         _collect_holidays(args.start, end)
-    if "weather" in datasets:
-        _collect_weather(args.start, end, today, args.incremental)
     if args.serpapi_label:
         _collect_serpapi(args.serpapi_label, today)
+    if "weather" in datasets:
+        _collect_weather(args.start, end, today, args.incremental)
     if "daily_context" in datasets:
         _collect_daily_context(args.start, end, today)
     return 0
