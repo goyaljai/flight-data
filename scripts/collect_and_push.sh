@@ -13,6 +13,8 @@ set -a
 set +a
 mkdir -p "$LOG_DIR"
 cd "$PROJECT"
+export PYTHONPATH="$PROJECT${PYTHONPATH:+:$PYTHONPATH}"
+printf '%s collector start label=%s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" "$LABEL"
 
 status=0
 if ! "$PROJECT/.venv/bin/python" -m collector --incremental --serpapi-label "$LABEL"; then
