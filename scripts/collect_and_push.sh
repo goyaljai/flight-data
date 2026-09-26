@@ -28,8 +28,9 @@ if [ ! -f "$RUNTIME/.migrated" ]; then
             fi
         done
     done
-    touch "$RUNTIME/.migrated"
+touch "$RUNTIME/.migrated"
 fi
+GIT_SSH_COMMAND="ssh -F $GIT_CONFIG" git -C "$PROJECT" pull --rebase --autostash origin main
 printf '%s collector start label=%s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" "$LABEL"
 
 status=0
