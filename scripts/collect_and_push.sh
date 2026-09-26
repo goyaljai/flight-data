@@ -30,7 +30,7 @@ if [ ! -f "$RUNTIME/.migrated" ]; then
     done
 touch "$RUNTIME/.migrated"
 fi
-GIT_SSH_COMMAND="ssh -F $GIT_CONFIG" git -C "$PROJECT" pull --rebase --autostash origin main
+GIT_SSH_COMMAND="ssh -F $GIT_CONFIG" git -C "$PROJECT" pull --rebase --autostash origin main || printf '%s git sync before collection failed; continuing\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
 printf '%s collector start label=%s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" "$LABEL"
 
 status=0
@@ -42,7 +42,7 @@ git -C "$PROJECT" add collector scripts/collect_and_push.sh README.md requiremen
 find "$PROJECT/data" -type f -name 'daily_context.csv' -print0 | xargs -0 -r git -C "$PROJECT" add
 if ! git -C "$PROJECT" diff --cached --quiet; then
     git -C "$PROJECT" -c user.name="jai-dontdelete-vm" -c user.email="jai-dontdelete-vm@users.noreply.github.com" commit -m "Update daily context data" || status=1
-    if ! GIT_SSH_COMMAND="ssh -F $GIT_CONFIG" git -C "$PROJECT" pull --rebase origin main; then
+    if ! GIT_SSH_COMMAND="ssh -F $GIT_CONFIG" git -C "$PROJECT" pull --rebase --autostash origin main; then
         status=1
     elif ! GIT_SSH_COMMAND="ssh -F $GIT_CONFIG" git -C "$PROJECT" push origin main; then
         status=1
