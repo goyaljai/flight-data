@@ -38,7 +38,8 @@ if ! "$PROJECT/.venv/bin/python" -m collector --incremental --serpapi-label "$LA
     status=1
 fi
 
-git -C "$PROJECT" add collector scripts README.md requirements.txt .gitignore .env.example data
+git -C "$PROJECT" add collector scripts/collect_and_push.sh README.md requirements.txt .gitignore .env.example
+find "$PROJECT/data" -type f -name 'daily_context.csv' -print0 | xargs -0 -r git -C "$PROJECT" add
 if ! git -C "$PROJECT" diff --cached --quiet; then
     git -C "$PROJECT" -c user.name="jai-dontdelete-vm" -c user.email="jai-dontdelete-vm@users.noreply.github.com" commit -m "Update daily context data" || status=1
     if ! GIT_SSH_COMMAND="ssh -F $GIT_CONFIG" git -C "$PROJECT" pull --rebase origin main; then
