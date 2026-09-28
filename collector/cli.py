@@ -4,16 +4,18 @@ import logging
 from datetime import date
 
 from . import storage
+from .atf import ATF_FIELDS, atf_rows
 from .calendar_data import CALENDAR_FIELDS, calendar_rows, parse_date
-from .config import DEFAULT_START_DATE, SLOT_LATE_AFTERNOON, SLOT_MORNING, calendarific_key, serpapi_key
+from .config import DEFAULT_START_DATE, SLOT_LATE_AFTERNOON, SLOT_MORNING, calendarific_keys, serpapi_key
 from .daily_context import DAILY_CONTEXT_FIELDS, DAILY_CONTEXT_KEYS, build_daily_context_rows
+from .events import EVENT_FIELDS, event_rows
 from .holidays import HOLIDAY_FIELDS, holiday_rows
 from .hourly_weather import historical_slot_rows
 from .serpapi import SNAPSHOT_FIELDS, collect_snapshots
 from .weather import WEATHER_FIELDS, ist_today, missing_weather_dates, weather_rows
 
 logger = logging.getLogger(__name__)
-_DATASETS = ("weather", "calendar", "holidays", "daily_context")
+_DATASETS = ("weather", "calendar", "holidays", "events", "atf", "daily_context")
 
 
 def main(argv=None):
@@ -38,6 +40,10 @@ def main(argv=None):
         _collect_calendar(args.start, end, args.incremental)
     if "holidays" in datasets:
         _collect_holidays(args.start, end)
+    if "events" in datasets:
+        _collect_events(args.start, end)
+    if "atf" in datasets:
+        _collect_atf(args.start, end)
     if args.serpapi_label:
         _collect_serpapi(args.serpapi_label, today)
     if "weather" in datasets:
@@ -77,8 +83,20 @@ def _collect_calendar(start, end, incremental):
 
 
 def _collect_holidays(start, end):
-    rows = [row for row in holiday_rows(start.year, end.year, calendarific_api_key=calendarific_key()) if start.isoformat() <= row["Date"] <= end.isoformat()]
+    rows = [row for row in holiday_rows(start.year, end.year, calendarific_api_keys=calendarific_keys()) if start.isoformat() <= row["Date"] <= end.isoformat()]
     _upsert(rows, "holidays.csv", ("Date", "State_Region", "Holiday_Name"), HOLIDAY_FIELDS, "holiday")
+
+
+def _collect_events(start, end):
+    rows = [row for row in event_rows(start.year, end.year) if start.isoformat() <= row["Date"] <= end.isoformat()]
+    _upsert(rows, "events.csv", ("Date", "Event_Name"), EVENT_FIELDS, "event")
+
+
+def _collect_atf(start, end):
+    rows = atf_rows(start, end, serpapi_key(), _existing_rows("atf_prices.csv", start, end))
+    if rows:
+        _upsert(rows, "atf_prices.csv", ("Date",), ATF_FIELDS, "atf")
+        logger.info("atf: %d date(s) fetched", len(rows))
 
 
 def _collect_weather(start, end, today, incremental):

@@ -1,4 +1,5 @@
 """India holiday rows from python-holidays with optional Calendarific enrichment."""
+import json
 import logging
 from datetime import date
 
@@ -7,6 +8,7 @@ from holidays.constants import GOVERNMENT, PUBLIC
 
 from .config import (
     CALENDARIFIC_API_URL,
+    CALENDARIFIC_FETCH_STATE,
     CITIES,
     HOLIDAYS_MAX_YEAR,
     HOLIDAYS_MIN_YEAR,
@@ -34,7 +36,7 @@ def check_year_support(start_year, end_year):
         )
 
 
-def holiday_rows(start_year, end_year, calendarific_api_key=""):
+def holiday_rows(start_year, end_year, calendarific_api_keys=()):
     check_year_support(start_year, end_year)
     years = list(range(start_year, end_year + 1))
     rows = []
@@ -50,7 +52,7 @@ def holiday_rows(start_year, end_year, calendarific_api_key=""):
                     continue
                 rows.append(_row(day, name, category, subdiv, SOURCE_PYTHON_HOLIDAYS))
     taken = {(r["Date"], r["State_Region"]) for r in rows}
-    rows.extend(_calendarific_rows(years, calendarific_api_key, taken))
+    rows.extend(_calendarific_rows(years, tuple(calendarific_api_keys), taken))
     return rows
 
 
@@ -86,12 +88,18 @@ def _calendarific_location(subdiv):
     return _CALENDARIFIC_LOCATION_OVERRIDES.get(subdiv, f"in-{subdiv.lower()}")
 
 
-def _calendarific_rows(years, api_key, taken):
-    if not api_key:
+def _calendarific_rows(years, api_keys, taken):
+    if not api_keys:
         return []
+    state = _load_fetch_state()
+    today = date.today().isoformat()
     rows = []
     for year in years:
-        for subdiv in SUBDIVISIONS:
+        for index, subdiv in enumerate(SUBDIVISIONS):
+            state_key = f"{year}-{subdiv}"
+            if state.get(state_key, "")[:7] == today[:7]:
+                continue
+            api_key = api_keys[index % len(api_keys)]
             context = f"calendarific {year} {subdiv}"
             try:
                 payload = get_json(
@@ -108,6 +116,7 @@ def _calendarific_rows(years, api_key, taken):
             except HttpError as exc:
                 logger.warning("%s: enrichment skipped: %s", context, exc)
                 continue
+            state[state_key] = today
             for item in payload.get("response", {}).get("holidays", []):
                 iso = item.get("date", {}).get("iso", "")
                 region = NATIONAL if item.get("locations") == "All" else subdiv
@@ -129,4 +138,20 @@ def _calendarific_rows(years, api_key, taken):
                         SOURCE_CALENDARIFIC,
                     )
                 )
+    _save_fetch_state(state)
     return rows
+
+
+def _load_fetch_state():
+    try:
+        return json.loads(CALENDARIFIC_FETCH_STATE.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def _save_fetch_state(state):
+    try:
+        CALENDARIFIC_FETCH_STATE.parent.mkdir(parents=True, exist_ok=True)
+        CALENDARIFIC_FETCH_STATE.write_text(json.dumps(state, indent=2), encoding="utf-8")
+    except OSError as exc:
+        logger.warning("calendarific fetch state not saved: %s", exc)

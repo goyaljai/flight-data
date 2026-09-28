@@ -10,6 +10,7 @@ RUNTIME_DATA_ROOT = RUNTIME_ROOT / "data"
 PUBLISHED_DATA_ROOT = Path(os.environ.get("COLLECTOR_PUBLISHED_ROOT", str(PROJECT_ROOT / "data")))
 DATA_ROOT = RUNTIME_DATA_ROOT
 FAILURE_LOG = RUNTIME_ROOT / "failures.log"
+CALENDARIFIC_FETCH_STATE = RUNTIME_ROOT / "calendarific_fetched.json"
 DEFAULT_START_DATE = date(2026, 6, 1)
 OPEN_METEO_HISTORICAL_URL = "https://archive-api.open-meteo.com/v1/archive"
 OPEN_METEO_HISTORICAL_FORECAST_URL = "https://historical-forecast-api.open-meteo.com/v1/forecast"
@@ -56,5 +57,6 @@ CITY_BY_CODE = {city.code: city for city in CITIES}
 def serpapi_key():
     return os.environ.get("SERPAPI_API_KEY", "").strip()
 
-def calendarific_key():
-    return os.environ.get("CALENDARIFIC_API_KEY", "").strip()
+def calendarific_keys():
+    values = (os.environ.get("CALENDARIFIC_API_KEY", ""), os.environ.get("CALENDARIFIC_API_KEY_2", ""), os.environ.get("CALENDARIFIC_API_KEY_3", ""))
+    return [key.strip() for key in values if key.strip()]
