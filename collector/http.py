@@ -19,6 +19,28 @@ class HttpError(Exception):
     pass
 
 
+def get_text(url, *, params=None, headers=None, context="request"):
+    last_error = None
+    for attempt in range(1, HTTP_MAX_RETRIES + 1):
+        try:
+            response = requests.get(url, params=params, headers=headers, timeout=HTTP_TIMEOUT_SECONDS)
+        except requests.RequestException as exc:
+            last_error = f"{context}: network error: {exc}"
+            logger.warning("%s (attempt %d/%d)", last_error, attempt, HTTP_MAX_RETRIES)
+            _sleep_backoff(attempt)
+            continue
+        if response.status_code == 200:
+            return response.text
+        if response.status_code in _RETRYABLE_STATUSES:
+            retry_after = response.headers.get("Retry-After")
+            last_error = f"{context}: HTTP {response.status_code}"
+            logger.warning("%s (attempt %d/%d)", last_error, attempt, HTTP_MAX_RETRIES)
+            _sleep_backoff(attempt, retry_after)
+            continue
+        raise HttpError(f"{context}: HTTP {response.status_code}: {response.text[:300]}")
+    raise HttpError(f"{last_error} (exhausted {HTTP_MAX_RETRIES} attempts)")
+
+
 def get_json(url, params, *, context="request"):
     last_error = None
     for attempt in range(1, HTTP_MAX_RETRIES + 1):

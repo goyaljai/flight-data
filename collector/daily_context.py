@@ -13,7 +13,7 @@ DAILY_CONTEXT_FIELDS = (
     "Temperature_Max_C", "Temperature_Min_C", "Temperature_Mean_C", "Apparent_Temperature_Max_C", "Apparent_Temperature_Min_C",
     "Precipitation_Sum_MM", "Rain_Sum_MM", "Precipitation_Hours", "Wind_Speed_Max_KMH", "Wind_Gusts_Max_KMH", "Wind_Direction_Dominant_Deg", "Weather_Code",
     "Holiday_Names", "Holiday_Types", "Holiday_Regions", "Holiday_Sources", "Is_Holiday",
-    "Event", "ATF_Price_INR_KL",
+    "Event", "ATF_Proxy_Price_INR_Per_Litre",
     "Slot_Temperature_C", "Slot_Humidity_Percent", "Slot_Precipitation_Probability_Percent", "Slot_Wind_Speed_KMH", "Slot_Weather_Code", "Slot_Condition_Text",
 )
 SLOT_FIELDS = ("Temperature_C", "Humidity_Percent", "Precipitation_Probability", "Wind_Speed", "Weather_Code", "Weather_Condition", "Capture_Source", "Captured_At")
@@ -34,7 +34,7 @@ def build_daily_context_rows(year, month, through=None):
     events = {}
     for row in read_rows(runtime_month_path(first, "events.csv")):
         events.setdefault(row.get("Date"), []).append(row.get("Event_Name", ""))
-    atf = {r.get("Date"): r.get("ATF_Price_INR_KL", "") for r in read_rows(runtime_month_path(first, "atf_prices.csv"))}
+    atf = {r.get("Date"): r.get("ATF_Proxy_Price_INR_Per_Litre", "") for r in read_rows(runtime_month_path(first, "atf_prices.csv"))}
     snapshots = {}
     for row in read_rows(runtime_month_path(first, "weather_snapshots.csv")):
         snapshots[(row.get("City_Code"), row.get("Date"), row.get("Capture_Label"))] = row

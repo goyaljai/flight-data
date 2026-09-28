@@ -93,7 +93,7 @@ def _collect_events(start, end):
 
 
 def _collect_atf(start, end):
-    rows = atf_rows(start, end, serpapi_key(), _existing_rows("atf_prices.csv", start, end))
+    rows = atf_rows(start, end, _existing_rows("atf_prices.csv", start, end))
     if rows:
         _upsert(rows, "atf_prices.csv", ("Date",), ATF_FIELDS, "atf")
         logger.info("atf: %d date(s) fetched", len(rows))

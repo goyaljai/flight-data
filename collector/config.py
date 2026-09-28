@@ -16,6 +16,7 @@ OPEN_METEO_HISTORICAL_URL = "https://archive-api.open-meteo.com/v1/archive"
 OPEN_METEO_HISTORICAL_FORECAST_URL = "https://historical-forecast-api.open-meteo.com/v1/forecast"
 HISTORICAL_FORECAST_MIN_DATE = date(2022, 1, 1)
 CALENDARIFIC_API_URL = "https://calendarific.com/api/v2/holidays"
+FUEL_PRICE_URL = "http://www.mypetrolprice.com/3/Petrol-price-in-Mumbai"
 HOLIDAYS_MIN_YEAR = 2001
 HOLIDAYS_MAX_YEAR = 2035
 HTTP_TIMEOUT_SECONDS = 60
