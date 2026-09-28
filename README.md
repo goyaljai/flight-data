@@ -16,7 +16,7 @@ The city codes are `BOM`, `DEL`, `BLR`, `HYD`, `MAA`, `CCU`, `PNQ`, `AMD`, `STV`
 
 Open-Meteo supplies daily historical weather and historical hourly values for the two slot times. SerpAPI supplies live slot observations. Both sources populate the same provider-neutral published columns. Provider provenance remains private in runtime data and logs. Failed live slots retain blank observation fields. No random or fabricated values are inserted.
 
-Calendar weekday/weekend values are generated locally. Indian holidays use `python-holidays` with state subdivisions. `CALENDARIFIC_API_KEY` is optional and is not required for the baseline collector.
+Calendar weekday/weekend values are generated locally. Indian holidays use `python-holidays` with state subdivisions plus a small set of curated static entries retained from the previous Calendarific enrichment.
 
 ## Automation
 
