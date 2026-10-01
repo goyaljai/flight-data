@@ -1,31 +1,31 @@
 Date,City,City_Code,Capture_Timestamp,Capture_Label,Captured_At,Latitude,Longitude,Day_of_Week,Is_Weekend,Temperature_Max_C,Temperature_Min_C,Temperature_Mean_C,Apparent_Temperature_Max_C,Apparent_Temperature_Min_C,Precipitation_Sum_MM,Rain_Sum_MM,Precipitation_Hours,Wind_Speed_Max_KMH,Wind_Gusts_Max_KMH,Wind_Direction_Dominant_Deg,Weather_Code,Holiday_Names,Holiday_Types,Holiday_Regions,Holiday_Sources,Is_Holiday,Event,ATF_Proxy_Price_INR_Per_Litre,Slot_Temperature_C,Slot_Humidity_Percent,Slot_Precipitation_Probability_Percent,Slot_Wind_Speed_KMH,Slot_Weather_Code,Slot_Condition_Text
 2026-10-01,Mumbai,BOM,2026-10-01T09:00:00+05:30,morning,2026-10-01T09:00:06+05:30,19.076,72.8777,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,30.0,75.0,0.0,5.0,,Partly sunny
-2026-10-01,Mumbai,BOM,2026-10-01T17:00:00+05:30,late_afternoon,,19.076,72.8777,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-10-01,Mumbai,BOM,2026-10-01T17:00:00+05:30,late_afternoon,2026-10-01T18:00:07+05:30,19.076,72.8777,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,32.0,70.0,0.0,13.0,,Sunny
 2026-10-01,Delhi,DEL,2026-10-01T09:00:00+05:30,morning,2026-10-01T09:00:06+05:30,28.7041,77.1025,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,29.0,64.0,0.0,8.0,,Sunny
-2026-10-01,Delhi,DEL,2026-10-01T17:00:00+05:30,late_afternoon,,28.7041,77.1025,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-10-01,Delhi,DEL,2026-10-01T17:00:00+05:30,late_afternoon,2026-10-01T18:00:07+05:30,28.7041,77.1025,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,31.0,56.0,0.0,6.0,,Sunny
 2026-10-01,Bengaluru,BLR,2026-10-01T09:00:00+05:30,morning,2026-10-01T09:00:06+05:30,12.9716,77.5946,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,24.0,76.0,5.0,5.0,,Partly sunny
-2026-10-01,Bengaluru,BLR,2026-10-01T17:00:00+05:30,late_afternoon,,12.9716,77.5946,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-10-01,Bengaluru,BLR,2026-10-01T17:00:00+05:30,late_afternoon,2026-10-01T18:00:07+05:30,12.9716,77.5946,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,26.0,63.0,10.0,5.0,,Cloudy
 2026-10-01,Hyderabad,HYD,2026-10-01T09:00:00+05:30,morning,2026-10-01T09:00:06+05:30,17.385,78.4867,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,30.0,53.0,10.0,6.0,,Mostly cloudy
-2026-10-01,Hyderabad,HYD,2026-10-01T17:00:00+05:30,late_afternoon,,17.385,78.4867,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-10-01,Hyderabad,HYD,2026-10-01T17:00:00+05:30,late_afternoon,2026-10-01T18:00:07+05:30,17.385,78.4867,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,30.0,51.0,0.0,10.0,,Partly sunny
 2026-10-01,Chennai,MAA,2026-10-01T09:00:00+05:30,morning,2026-10-01T09:00:06+05:30,13.0827,80.2707,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,32.0,68.0,10.0,3.0,,Mostly cloudy
-2026-10-01,Chennai,MAA,2026-10-01T17:00:00+05:30,late_afternoon,,13.0827,80.2707,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-10-01,Chennai,MAA,2026-10-01T17:00:00+05:30,late_afternoon,2026-10-01T18:00:07+05:30,13.0827,80.2707,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,30.0,78.0,10.0,11.0,,Cloudy
 2026-10-01,Kolkata,CCU,2026-10-01T09:00:00+05:30,morning,2026-10-01T09:00:06+05:30,22.5726,88.3639,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,32.0,69.0,5.0,6.0,,Partly sunny
-2026-10-01,Kolkata,CCU,2026-10-01T17:00:00+05:30,late_afternoon,,22.5726,88.3639,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-10-01,Kolkata,CCU,2026-10-01T17:00:00+05:30,late_afternoon,2026-10-01T18:00:07+05:30,22.5726,88.3639,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,28.0,84.0,0.0,6.0,,Partly cloudy
 2026-10-01,Pune,PNQ,2026-10-01T09:00:00+05:30,morning,2026-10-01T09:00:06+05:30,18.5204,73.8567,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,27.0,71.0,0.0,5.0,,Sunny
-2026-10-01,Pune,PNQ,2026-10-01T17:00:00+05:30,late_afternoon,,18.5204,73.8567,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-10-01,Pune,PNQ,2026-10-01T17:00:00+05:30,late_afternoon,2026-10-01T18:00:07+05:30,18.5204,73.8567,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,30.0,54.0,0.0,6.0,,Mostly sunny
 2026-10-01,Ahmedabad,AMD,2026-10-01T09:00:00+05:30,morning,2026-10-01T09:00:06+05:30,23.0225,72.5714,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,29.0,67.0,0.0,6.0,,Sunny
-2026-10-01,Ahmedabad,AMD,2026-10-01T17:00:00+05:30,late_afternoon,,23.0225,72.5714,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-10-01,Ahmedabad,AMD,2026-10-01T17:00:00+05:30,late_afternoon,2026-10-01T18:00:07+05:30,23.0225,72.5714,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,33.0,41.0,0.0,5.0,,Sunny
 2026-10-01,Surat,STV,2026-10-01T09:00:00+05:30,morning,2026-10-01T09:00:06+05:30,21.1702,72.8311,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,30.0,67.0,0.0,8.0,,Sunny
-2026-10-01,Surat,STV,2026-10-01T17:00:00+05:30,late_afternoon,,21.1702,72.8311,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-10-01,Surat,STV,2026-10-01T17:00:00+05:30,late_afternoon,2026-10-01T18:00:07+05:30,21.1702,72.8311,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,32.0,59.0,0.0,8.0,,Sunny
 2026-10-01,Visakhapatnam,VTZ,2026-10-01T09:00:00+05:30,morning,2026-10-01T09:00:06+05:30,17.6868,83.2185,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,31.0,68.0,0.0,2.0,,Mostly sunny
-2026-10-01,Visakhapatnam,VTZ,2026-10-01T17:00:00+05:30,late_afternoon,,17.6868,83.2185,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-10-01,Visakhapatnam,VTZ,2026-10-01T17:00:00+05:30,late_afternoon,2026-10-01T18:00:07+05:30,17.6868,83.2185,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,29.0,77.0,10.0,11.0,,Mostly cloudy
 2026-10-01,Jaipur,JAI,2026-10-01T09:00:00+05:30,morning,2026-10-01T09:00:06+05:30,26.9124,75.7873,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,29.0,47.0,0.0,11.0,,Sunny
-2026-10-01,Jaipur,JAI,2026-10-01T17:00:00+05:30,late_afternoon,,26.9124,75.7873,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-10-01,Jaipur,JAI,2026-10-01T17:00:00+05:30,late_afternoon,2026-10-01T18:00:07+05:30,26.9124,75.7873,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,31.0,39.0,0.0,6.0,,Sunny
 2026-10-01,Kochi,COK,2026-10-01T09:00:00+05:30,morning,2026-10-01T09:00:06+05:30,9.9312,76.2673,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,30.0,74.0,0.0,8.0,,Mostly cloudy
-2026-10-01,Kochi,COK,2026-10-01T17:00:00+05:30,late_afternoon,,9.9312,76.2673,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-10-01,Kochi,COK,2026-10-01T17:00:00+05:30,late_afternoon,2026-10-01T18:00:07+05:30,9.9312,76.2673,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,29.0,81.0,70.0,5.0,,Thundershower
 2026-10-01,Chandigarh,IXC,2026-10-01T09:00:00+05:30,morning,2026-10-01T09:00:06+05:30,30.7333,76.7794,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,27.0,66.0,0.0,8.0,,Sunny
-2026-10-01,Chandigarh,IXC,2026-10-01T17:00:00+05:30,late_afternoon,,30.7333,76.7794,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-10-01,Chandigarh,IXC,2026-10-01T17:00:00+05:30,late_afternoon,2026-10-01T18:00:07+05:30,30.7333,76.7794,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,29.0,58.0,0.0,11.0,,Sunny
 2026-10-01,Indore,IDR,2026-10-01T09:00:00+05:30,morning,2026-10-01T09:00:06+05:30,22.7196,75.8577,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,28.0,57.0,0.0,5.0,,Sunny
-2026-10-01,Indore,IDR,2026-10-01T17:00:00+05:30,late_afternoon,,22.7196,75.8577,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-10-01,Indore,IDR,2026-10-01T17:00:00+05:30,late_afternoon,2026-10-01T18:00:07+05:30,22.7196,75.8577,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,30.0,39.0,0.0,6.0,,Sunny
 2026-10-01,Lucknow,LKO,2026-10-01T09:00:00+05:30,morning,2026-10-01T09:00:06+05:30,26.8467,80.9462,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,29.0,71.0,0.0,8.0,,Sunny
-2026-10-01,Lucknow,LKO,2026-10-01T17:00:00+05:30,late_afternoon,,26.8467,80.9462,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-10-01,Lucknow,LKO,2026-10-01T17:00:00+05:30,late_afternoon,2026-10-01T18:00:07+05:30,26.8467,80.9462,Thursday,false,,,,,,,,,,,,,,,,,false,,111.21,29.0,72.0,0.0,8.0,,Clear
