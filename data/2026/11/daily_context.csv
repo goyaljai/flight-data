@@ -300,32 +300,32 @@ Date,City,City_Code,Capture_Timestamp,Capture_Label,Captured_At,Latitude,Longitu
 2026-11-10,Lucknow,LKO,2026-11-10T09:00:00+05:30,morning,2026-11-10T09:00:06+05:30,26.8467,80.9462,Tuesday,false,28.8,18.9,23.6,31.4,21.0,0.0,0.0,0.0,6.4,16.6,283,0,Govardhan Puja,public,UP,python-holidays,true,,111.21,24.0,70.0,0.0,3.0,,Sunny
 2026-11-10,Lucknow,LKO,2026-11-10T17:00:00+05:30,late_afternoon,2026-11-10T18:00:06+05:30,26.8467,80.9462,Tuesday,false,28.8,18.9,23.6,31.4,21.0,0.0,0.0,0.0,6.4,16.6,283,0,Govardhan Puja,public,UP,python-holidays,true,,111.21,25.0,64.0,0.0,5.0,,Clear
 2026-11-11,Mumbai,BOM,2026-11-11T09:00:00+05:30,morning,2026-11-11T09:00:06+05:30,19.076,72.8777,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,29.0,50.0,0.0,8.0,,Sunny
-2026-11-11,Mumbai,BOM,2026-11-11T17:00:00+05:30,late_afternoon,,19.076,72.8777,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-11-11,Mumbai,BOM,2026-11-11T17:00:00+05:30,late_afternoon,2026-11-11T18:00:07+05:30,19.076,72.8777,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,32.0,52.0,0.0,16.0,,Sunny
 2026-11-11,Delhi,DEL,2026-11-11T09:00:00+05:30,morning,2026-11-11T09:00:06+05:30,28.7041,77.1025,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,22.0,65.0,0.0,3.0,,Sunny
-2026-11-11,Delhi,DEL,2026-11-11T17:00:00+05:30,late_afternoon,,28.7041,77.1025,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-11-11,Delhi,DEL,2026-11-11T17:00:00+05:30,late_afternoon,2026-11-11T18:00:07+05:30,28.7041,77.1025,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,25.0,59.0,0.0,6.0,,Partly cloudy
 2026-11-11,Bengaluru,BLR,2026-11-11T09:00:00+05:30,morning,2026-11-11T09:00:06+05:30,12.9716,77.5946,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,23.0,63.0,10.0,11.0,,Mostly cloudy
-2026-11-11,Bengaluru,BLR,2026-11-11T17:00:00+05:30,late_afternoon,,12.9716,77.5946,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-11-11,Bengaluru,BLR,2026-11-11T17:00:00+05:30,late_afternoon,2026-11-11T18:00:07+05:30,12.9716,77.5946,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,25.0,50.0,10.0,6.0,,Mostly cloudy
 2026-11-11,Hyderabad,HYD,2026-11-11T09:00:00+05:30,morning,2026-11-11T09:00:06+05:30,17.385,78.4867,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,27.0,37.0,0.0,10.0,,Sunny
-2026-11-11,Hyderabad,HYD,2026-11-11T17:00:00+05:30,late_afternoon,,17.385,78.4867,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-11-11,Hyderabad,HYD,2026-11-11T17:00:00+05:30,late_afternoon,2026-11-11T18:00:07+05:30,17.385,78.4867,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,26.0,37.0,0.0,10.0,,Clear
 2026-11-11,Chennai,MAA,2026-11-11T09:00:00+05:30,morning,2026-11-11T09:00:06+05:30,13.0827,80.2707,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,29.0,73.0,10.0,19.0,,Cloudy
-2026-11-11,Chennai,MAA,2026-11-11T17:00:00+05:30,late_afternoon,,13.0827,80.2707,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-11-11,Chennai,MAA,2026-11-11T17:00:00+05:30,late_afternoon,2026-11-11T18:00:07+05:30,13.0827,80.2707,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,28.0,78.0,5.0,18.0,,Partly cloudy
 2026-11-11,Kolkata,CCU,2026-11-11T09:00:00+05:30,morning,2026-11-11T09:00:06+05:30,22.5726,88.3639,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,27.0,74.0,0.0,5.0,,Mostly sunny
-2026-11-11,Kolkata,CCU,2026-11-11T17:00:00+05:30,late_afternoon,,22.5726,88.3639,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-11-11,Kolkata,CCU,2026-11-11T17:00:00+05:30,late_afternoon,2026-11-11T18:00:07+05:30,22.5726,88.3639,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,26.0,77.0,0.0,5.0,,Partly cloudy
 2026-11-11,Pune,PNQ,2026-11-11T09:00:00+05:30,morning,2026-11-11T09:00:06+05:30,18.5204,73.8567,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,24.0,49.0,0.0,3.0,,Sunny
-2026-11-11,Pune,PNQ,2026-11-11T17:00:00+05:30,late_afternoon,,18.5204,73.8567,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-11-11,Pune,PNQ,2026-11-11T17:00:00+05:30,late_afternoon,2026-11-11T18:00:07+05:30,18.5204,73.8567,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,26.0,46.0,0.0,5.0,,Clear
 2026-11-11,Ahmedabad,AMD,2026-11-11T09:00:00+05:30,morning,2026-11-11T09:00:06+05:30,23.0225,72.5714,Wednesday,false,,,,,,,,,,,,,Bhai Duj,public,GJ,python-holidays,true,,111.21,27.0,40.0,0.0,6.0,,Sunny
-2026-11-11,Ahmedabad,AMD,2026-11-11T17:00:00+05:30,late_afternoon,,23.0225,72.5714,Wednesday,false,,,,,,,,,,,,,Bhai Duj,public,GJ,python-holidays,true,,111.21,,,,,,
+2026-11-11,Ahmedabad,AMD,2026-11-11T17:00:00+05:30,late_afternoon,2026-11-11T18:00:07+05:30,23.0225,72.5714,Wednesday,false,,,,,,,,,,,,,Bhai Duj,public,GJ,python-holidays,true,,111.21,31.0,33.0,0.0,6.0,,Clear
 2026-11-11,Surat,STV,2026-11-11T09:00:00+05:30,morning,2026-11-11T09:00:06+05:30,21.1702,72.8311,Wednesday,false,,,,,,,,,,,,,Bhai Duj,public,GJ,python-holidays,true,,111.21,27.0,50.0,0.0,5.0,,Sunny
-2026-11-11,Surat,STV,2026-11-11T17:00:00+05:30,late_afternoon,,21.1702,72.8311,Wednesday,false,,,,,,,,,,,,,Bhai Duj,public,GJ,python-holidays,true,,111.21,,,,,,
+2026-11-11,Surat,STV,2026-11-11T17:00:00+05:30,late_afternoon,2026-11-11T18:00:07+05:30,21.1702,72.8311,Wednesday,false,,,,,,,,,,,,,Bhai Duj,public,GJ,python-holidays,true,,111.21,29.0,47.0,0.0,10.0,,Clear
 2026-11-11,Visakhapatnam,VTZ,2026-11-11T09:00:00+05:30,morning,2026-11-11T09:00:06+05:30,17.6868,83.2185,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,29.0,59.0,10.0,14.0,,Cloudy
-2026-11-11,Visakhapatnam,VTZ,2026-11-11T17:00:00+05:30,late_afternoon,,17.6868,83.2185,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-11-11,Visakhapatnam,VTZ,2026-11-11T17:00:00+05:30,late_afternoon,2026-11-11T18:00:07+05:30,17.6868,83.2185,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,28.0,77.0,5.0,16.0,,Partly cloudy
 2026-11-11,Jaipur,JAI,2026-11-11T09:00:00+05:30,morning,2026-11-11T09:00:06+05:30,26.9124,75.7873,Wednesday,false,,,,,,,,,,,,,Bhai Duj,public,RJ,python-holidays,true,,111.21,24.0,44.0,0.0,3.0,,Sunny
-2026-11-11,Jaipur,JAI,2026-11-11T17:00:00+05:30,late_afternoon,,26.9124,75.7873,Wednesday,false,,,,,,,,,,,,,Bhai Duj,public,RJ,python-holidays,true,,111.21,,,,,,
+2026-11-11,Jaipur,JAI,2026-11-11T17:00:00+05:30,late_afternoon,2026-11-11T18:00:07+05:30,26.9124,75.7873,Wednesday,false,,,,,,,,,,,,,Bhai Duj,public,RJ,python-holidays,true,,111.21,26.0,38.0,0.0,3.0,,Clear
 2026-11-11,Kochi,COK,2026-11-11T09:00:00+05:30,morning,2026-11-11T09:00:06+05:30,9.9312,76.2673,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,29.0,74.0,10.0,3.0,,Mostly cloudy
-2026-11-11,Kochi,COK,2026-11-11T17:00:00+05:30,late_afternoon,,9.9312,76.2673,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-11-11,Kochi,COK,2026-11-11T17:00:00+05:30,late_afternoon,2026-11-11T18:00:07+05:30,9.9312,76.2673,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,30.0,74.0,50.0,8.0,,Light thunderstorms and rain
 2026-11-11,Chandigarh,IXC,2026-11-11T09:00:00+05:30,morning,2026-11-11T09:00:06+05:30,30.7333,76.7794,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,21.0,60.0,0.0,3.0,,Sunny
-2026-11-11,Chandigarh,IXC,2026-11-11T17:00:00+05:30,late_afternoon,,30.7333,76.7794,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-11-11,Chandigarh,IXC,2026-11-11T17:00:00+05:30,late_afternoon,2026-11-11T18:00:07+05:30,30.7333,76.7794,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,24.0,53.0,0.0,8.0,,Clear
 2026-11-11,Indore,IDR,2026-11-11T09:00:00+05:30,morning,2026-11-11T09:00:06+05:30,22.7196,75.8577,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,25.0,45.0,0.0,3.0,,Sunny
-2026-11-11,Indore,IDR,2026-11-11T17:00:00+05:30,late_afternoon,,22.7196,75.8577,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,,,,,,
+2026-11-11,Indore,IDR,2026-11-11T17:00:00+05:30,late_afternoon,2026-11-11T18:00:07+05:30,22.7196,75.8577,Wednesday,false,,,,,,,,,,,,,,,,,false,,111.21,26.0,39.0,0.0,8.0,,Clear
 2026-11-11,Lucknow,LKO,2026-11-11T09:00:00+05:30,morning,2026-11-11T09:00:06+05:30,26.8467,80.9462,Wednesday,false,,,,,,,,,,,,,Bhai Duj; Chitragupt's Jayanti,public; public,UP; UP,python-holidays; python-holidays,true,,111.21,24.0,65.0,0.0,3.0,,Sunny
-2026-11-11,Lucknow,LKO,2026-11-11T17:00:00+05:30,late_afternoon,,26.8467,80.9462,Wednesday,false,,,,,,,,,,,,,Bhai Duj; Chitragupt's Jayanti,public; public,UP; UP,python-holidays; python-holidays,true,,111.21,,,,,,
+2026-11-11,Lucknow,LKO,2026-11-11T17:00:00+05:30,late_afternoon,2026-11-11T18:00:07+05:30,26.8467,80.9462,Wednesday,false,,,,,,,,,,,,,Bhai Duj; Chitragupt's Jayanti,public; public,UP; UP,python-holidays; python-holidays,true,,111.21,24.0,69.0,0.0,6.0,,Clear
